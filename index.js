@@ -18,6 +18,8 @@ app.get('/', function (req, res) {
 
 app.get('/webhook', function (req, res) {
 
+  console.log(req.query);
+  
   let mode = req.query['hub.verify_token'];
   let verify_token = req.query['hub.verify_token'];
   let challenge = req.query['hub.challenge'];
