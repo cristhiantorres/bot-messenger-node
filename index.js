@@ -17,15 +17,12 @@ app.get('/', function (req, res) {
 });
 
 app.get('/webhook', function (req, res) {
-
-  console.log(req.query);
   
-  let mode = req.query['hub.verify_token'];
+  let mode = req.query['hub.mode'];
   let verify_token = req.query['hub.verify_token'];
   let challenge = req.query['hub.challenge'];
 
   if (mode && verify_token) {
-    console.log(`${verify_token} === ${process.env.WEBHOOK_TOKEN}`);
     
     if (mode === "subscribe" && verify_token === process.env.WEBHOOK_TOKEN) {
       console.log("WEBHOOK_VERIFIED");
