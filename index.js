@@ -2,13 +2,14 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 
+require('dotenv').config();
+
 var app = express();
 app.use(bodyParser.json());
 
-const APP_TOKEN = 'EAAiZCOxdtL20BAPUYb2ZCHi2WzZCjdVqhZA5fTZA7zVNNV9gUXWq7Ybex4CX7ngdNCXLKT4LfxEB0kxocVSO9dhvZBYkDS20R7Uo9BcqvBjtp5BwJa5JSYwcj60MzOAHKc2RrvwAKmeYj1V2LX5ZBSh9OBsKSiYEqORunDNI7WJkPkjnZAZArslPfAAERvPPGUvsZD';
-
-app.listen(80, function () {
-  console.log("El servidor se encuentra en el puerto 3000");
+const port = process.env.PORT || 5000;
+app.listen(port, function () {
+  console.log(`El servidor se encuentra en el puerto ${port}`);
 });
 
 app.get('/', function (req, res) {
@@ -16,7 +17,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/webhook', function (req, res) {
-  if (req.query['hub.verify_token'] === 'test_token_say_hello') {
+  if (req.query['hub.verify_token'] === process.env.WEBHOOK_TOKEN) {
     res.send(req.query['hub.challenge'])
   } else {
     res.send("No estas autorizado.");
