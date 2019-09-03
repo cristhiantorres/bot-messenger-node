@@ -30,5 +30,8 @@ app.get('/webhook', function (req, res) {
       console.log("WEBHOOK_NOT_VERIFIED");
       res.sendStatus(403);
     }
+  } else {
+    console.log("WEBHOOK");
+    res.sendStatus(400);
   }
 });
