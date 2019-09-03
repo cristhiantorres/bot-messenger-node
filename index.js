@@ -13,13 +13,22 @@ app.listen(port, function () {
 });
 
 app.get('/', function (req, res) {
-  res.send(`Hola a todos! Puerto: ${port}`);
+  res.send(`Hola a todos!`);
 });
 
 app.get('/webhook', function (req, res) {
-  if (req.query['hub.verify_token'] === process.env.WEBHOOK_TOKEN) {
-    res.send(req.query['hub.challenge'])
-  } else {
-    res.send("No estas autorizado.");
+
+  let mode = req.query['hub.verify_token'];
+  let verify_token = req.query['hub.verify_token'];
+  let challenge = req.query['hub.challenge'];
+
+  if (mode && verify_token) {
+    if ( mode === 'subscribe' && verify_token === process.env.WEBHOOK_TOKEN) {
+      console.log("WEBHOOK_VERIFIED");
+      res.status(200).send(challenge);
+    } else {
+      console.log("WEBHOOK_NOT_VERIFIED");
+      res.sendStatus(403);
+    }
   }
 });
