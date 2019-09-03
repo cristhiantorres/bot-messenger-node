@@ -13,8 +13,7 @@ app.listen(port, function () {
 });
 
 app.get('/', function (req, res) {
-  console.log(`El servidor se encuentra en el puerto ${port}`);
-  res.send('Hola a todos!');
+  res.send(`Hola a todos! Puerto: ${port}`);
 });
 
 app.get('/webhook', function (req, res) {
