@@ -26,14 +26,17 @@ app.get('/webhook', (req, res) => {
     
     if (mode === "subscribe" && verify_token === process.env.WEBHOOK_TOKEN) {
       console.log("WEBHOOK_VERIFIED");
-      res.status(200).send(challenge);
+      res.send(challenge);
+      // res.status(200).send(challenge);
     } else {
       console.log("WEBHOOK_NOT_VERIFIED");
-      res.sendStatus(403);
+      res.send("WEBHOOK_NOT_VERIFIED");
+      // res.sendStatus(403);
     }
   } else {
     console.log("WEBHOOK");
-    res.sendStatus(400);
+    res.send("WEBHOOK");
+    // res.sendStatus(400);
   }
 });
 
