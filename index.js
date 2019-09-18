@@ -42,8 +42,8 @@ app.get('/webhook', (req, res) => {
 
 app.post('/webhook', (req, res) => {
   let body = req.body;
-
-  if (body === 'page') {
+  
+  if (body.object === 'page') {
     
     console.log('Entries', body.entry);
     
